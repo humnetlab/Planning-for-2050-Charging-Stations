@@ -1,10 +1,4 @@
-# Deep Sequence Learning with Auxiliary Information for Traffic Prediction. KDD 2018. (Accepted)
-
-### Binbing Liao, Jingqing Zhang, Chao Wu, Douglas McIlwraith, Tong Chen, Shengwen Yang, Yike Guo, Fei Wu
-
-###### Binbing Liao and Jingqing Zhang contributed equally to this article. 
-
-Paper Link: [arXiv](https://arxiv.org/abs/1806.07380) or [KDD18](http://www.kdd.org/kdd2018/accepted-papers/view/deep-sequence-learning-with-auxiliary-information-for-traffic-prediction)
+# Planning for 2050: Charging stations to support flexible electric vehicle demand considering individual mobility patterns
 
 ## Contents
 
