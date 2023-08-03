@@ -9,7 +9,7 @@
 With the widespread adoption of electric vehicles (EVs), it is crucial to plan for EV charging in a way that considers both EV driver behavior and the electricity grid's demand. We integrate detailed mobility data with empirical charging preferences to estimate charging demand and demonstrate the power of personalized shifting recommendations to move individual EV drivers' demand on the electricity grid out of peak hours. We find an unbalanced geographical distribution of charging demand in the San Francisco Bay Area, with temporal peaks in both grid off-peak hours in the morning and grid on-peak hours in the evening. Our strategy effectively transfers demand to off-peak charging load, taking advantage of the mobility behavior. 
 
 <p align="center">
-  <img src="figures/fig1_overview.pdf" width="600">
+  <img src="figures/fig1_overview.png" width="600">
   <br><i>Figure 1. Overview</i>
 </p>
 
