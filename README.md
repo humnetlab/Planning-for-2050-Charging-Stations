@@ -1,6 +1,6 @@
 # Planning for 2050: Charging stations to support flexible electric vehicle demand considering individual mobility patterns
 
-## Jiaman Wu, Siobhan Powell, Yanyan Xu, Ram Rajagopal, Marta C. Gonzalez
+#### Jiaman Wu, Siobhan Powell, Yanyan Xu, Ram Rajagopal, Marta C. Gonzalez
 
 ## Contents
 
