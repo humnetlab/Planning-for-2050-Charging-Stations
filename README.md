@@ -23,7 +23,8 @@ Overview of the proposed framework for understanding and planning future EV char
 
 <h2 id="Dataset">Dataset</h2>
 We use four different datasets in this study: call detail records (CDRs), charging session records, charging infrastructure data, and survey data such as US Census Bureau American Community Survey, the California Plug-in Electric Vehicle Adopter Survey, the California Home Charging Access Survey, and the Clean Vehicle Rebate Project (CVRP) data.
-\
+<br/>
+<br/>
 
 |                          Name                          	| Geograhical<br>Coverage 	| Temporal<br>Coverage 	| Geographical<br>Resolution 	| Temporal<br>Resolution 	| Aggregated<br>Level 	|
 |:------------------------------------------------------:	|:-----------------------:	|:--------------------:	|:--------------------------:	|:----------------------:	|:-------------------:	|
@@ -38,7 +39,8 @@ We use four different datasets in this study: call detail records (CDRs), chargi
 
 <h2 id="Method">Method</h2>
 Methodology overview. Dashed frames represent models; blue frames represent the data sources; grey frames represent the intermediate output; and yellow frames represent ultimate output, i.e., original charging demand, charging demand after personalized shifting recommendations, and the probability of each driver being an EV adopter.
-\
+<br/>
+<br/>
 <p align="center">
   <img src="figures/sp_method.jpg" width="900">
   <br><i>Figure 2. Method</i>
