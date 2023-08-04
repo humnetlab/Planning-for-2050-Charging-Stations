@@ -22,7 +22,7 @@ Overview of the proposed framework for understanding and planning future EV char
 </p>
 
 <h2 id="Dataset">Dataset</h2>
-We use different datasets in this study: call detail records (CDRs), charging session records, charging infrastructure data, and survey data such as US Census Bureau American Community Survey, the California Plug-in Electric Vehicle Adopter Survey, the California Home Charging Access Survey, and the Clean Vehicle Rebate Project (CVRP) data.
+We use different datasets in this study: call detail records (CDRs), charging session records, charging infrastructure data, and survey data such as US Census Bureau American Community Survey, the California Plug-in Electric Vehicle Adopter Survey, the California Home Charging Access Survey, and the Clean Vehicle Rebate Project (CVRP) data. The charging data and nobility data used in this study cannot be made publicly available due to privacy concerns for individual users.
 <br/>
 <br/>
 
