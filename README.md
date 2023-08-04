@@ -14,6 +14,8 @@ With the widespread adoption of electric vehicles (EVs), it is crucial to plan f
 
 <h2 id="Overview">Overview</h2>
 Overview of the proposed framework for understanding and planning future EV charging needs. (a) We analyze the current charging demand by extracting residents’ travel behavior and individual features, including visiting places and time, energy consumption, income, house type, and charging access, to sample potential EV adopters and assign them a charging behavior group. Based on that, we simulate all EV adopters’ charging behavior in a week, this includes charging location, session start and end time, energy, and power level. We propose personalized shifting recommendations to mitigate the impact of EV charging on grid peak hours. For example, EV adopters may shift their charging sessions from day 1 peak hour to day 2 off-peak hour when feasible. (b) Supply-side management means planning for infrastructure capacity at the ZIP code level, considering demand both before and after the proposed personalized shifting recommendations. (c) Future scenarios capture the evolution of EV adopters’ demographic features, charging demand, and the public charging station supply for increasing adoption rates.
+
+
 <p align="center">
   <img src="figures/fig1_overview.jpg" width="900">
   <br><i>Figure 1. Overview</i>
@@ -21,6 +23,8 @@ Overview of the proposed framework for understanding and planning future EV char
 
 <h2 id="Dataset">Dataset</h2>
 We use four different datasets in this study: call detail records (CDRs), charging session records, charging infrastructure data, and survey data such as US Census Bureau American Community Survey, the California Plug-in Electric Vehicle Adopter Survey, the California Home Charging Access Survey, and the Clean Vehicle Rebate Project (CVRP) data.
+
+
 
 |                          Name                          	| Geograhical<br>Coverage 	| Temporal<br>Coverage 	| Geographical<br>Resolution 	| Temporal<br>Resolution 	| Aggregated<br>Level 	|
 |:------------------------------------------------------:	|:-----------------------:	|:--------------------:	|:--------------------------:	|:----------------------:	|:-------------------:	|
@@ -34,9 +38,11 @@ We use four different datasets in this study: call detail records (CDRs), chargi
 
 <h2 id="Method">Method</h2>
 Methodology overview. Dashed frames represent models; blue frames represent the data sources; grey frames represent the intermediate output; and yellow frames represent ultimate output, i.e., original charging demand, charging demand after personalized shifting recommendations, and the probability of each driver being an EV adopter.
+
+
 <p align="center">
   <img src="figures/sp_method.jpg" width="900">
-  <br><i>Figure 1. Method</i>
+  <br><i>Figure 2. Method</i>
 </p>
 
 <h2 id="Setup">Setup</h2>
@@ -54,12 +60,14 @@ The structure of code:
 - [SimAdopter.py](model/SimAdopter.py): Simulate demographics of potential adopters, also estimate the probability of being an EV adopter.
 - [SimBehavior.py](model/SimBehavior.py): Simulate charging behavior.
 - [SimShift.py](model/SimShift.py): Simulate shifting recommendations.
-- [SimSensitivity](model/SimSensitivity.py): Conducting sensitivity analysis by changing parameters.
-- [AnaMobility.py](analysis/SimMobility.py): Visualize mobility patterns.
-- [AnaAdopter.py](analysis/SimAdopter.py): Visualize demographics of potential adopters.
-- [AnaBehavior.py](analysis/SimBehavior.py): Visualize charging behavior.
-- [AnaShift.py](analysis/SimShift.py): Visualize shifting recommendations' impacts.
-- [AnaSensitivity](analysis/SimSensitivity.py): Visualize sensitivity analysis.
+- [SimSensitivity.py](model/SimSensitivity.py): Conductsensitivity analysis by changing parameters.
+- [SimSpeechGroup.py](model/SimSpeechGroup.py): Calculate conditional probability P(SPEECh group | Home and/or Work charging access, Annual energy).
+- [SimSpeechValidation.py](model/SimSpeechValidation.py): Prepare validation files from the speech charging data. 
+- [AnaMobility.py](analysis/AnaMobility.py): Visualize mobility patterns.
+- [AnaAdopter.py](analysis/AnaAdopter.py): Visualize demographics of potential adopters.
+- [AnaBehavior.py](analysis/AnaBehavior.py): Visualize charging behavior.
+- [AnaShift.py](analysis/AnaShift.py): Visualize shifting recommendations' impacts.
+- [AnaSensitivity](analysis/AnaSensitivity.py): Visualize sensitivity analysis.
 
 To run demo code for simulation and analysis:
 - [model/RunMe.ipynb](model/RunMe.ipynb): Charging behavior and shifting recommendation simulation.
