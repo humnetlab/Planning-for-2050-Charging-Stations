@@ -29,7 +29,7 @@ We use four different datasets in this study: call detail records (CDRs), chargi
 |                          Name                          	| Geograhical<br>Coverage 	| Temporal<br>Coverage 	| Geographical<br>Resolution 	| Temporal<br>Resolution 	| Aggregated<br>Level 	|
 |:------------------------------------------------------:	|:-----------------------:	|:--------------------:	|:--------------------------:	|:----------------------:	|:-------------------:	|
 |                   Call Detail Records                  	|         Bay Area        	|         2013         	|           Lat,Lon          	|         10-min         	|      Individual     	|
-|          Charging Session Records            	|         Bay Area        	|         2019         	|          ZIP code          	|                        	|      Individual     	|
+|          [Charging Session Records](https://www.chargepoint.com)            	|         Bay Area        	|         2019         	|          ZIP code          	|                        	|      Individual     	|
 |                  [Charging Station Data](https://github.com/openchargemap)                 	|        Worldwide        	|         ~2023        	|           Lat,Lon          	|           Day          	|      Individual     	|
 |    [California Clean Vehicle <br>Rebate Project data](https://cleanvehiclerebate.org/en)    	|        California       	|         ~2023        	|          ZIP code          	|           Day          	|      Individual     	|
 |       [Census Bureau American <br>Community Survey](https://data.census.gov/)      	|      United States      	|         ~2022        	|        Census Tract        	|          Year          	|     Census Tract    	|
@@ -40,6 +40,7 @@ We use four different datasets in this study: call detail records (CDRs), chargi
 <h2 id="Method">Method</h2>
 
 The methodology includes four parts. We first use [TimeGeo](https://www.pnas.org/doi/10.1073/pnas.1524261113) model to estimate the travel behavior and energy consumption of each vehicle in the sample. Second, we connect the travel behavior and [SPEECh](https://github.com/SiobhanPowell/speech) model by energy consumption and charging access to obtain the original charging behavior of EV adopters. Third, we identify the feasibility of drivers moving their original sessions from peak hours to off-peak hours by checking several rules. Last, we use a Bayesian model to estimate the probability of each driver adopting an EV based on their income and travel distance. Figure 2 depicts the connection between the data source and models.
+
 <br/>
 <br/>
 <p align="center">
