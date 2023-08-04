@@ -14,7 +14,7 @@ With the widespread adoption of electric vehicles (EVs), it is crucial to plan f
 
 <h2 id="Overview">Overview</h2>
 Overview of the proposed framework for understanding and planning future EV charging needs. (a) We analyze the current charging demand by extracting residents’ travel behavior and individual features, including visiting places and time, energy consumption, income, house type, and charging access, to sample potential EV adopters and assign them a charging behavior group. Based on that, we simulate all EV adopters’ charging behavior in a week, this includes charging location, session start and end time, energy, and power level. We propose personalized shifting recommendations to mitigate the impact of EV charging on grid peak hours. For example, EV adopters may shift their charging sessions from day 1 peak hour to day 2 off-peak hour when feasible. (b) Supply-side management means planning for infrastructure capacity at the ZIP code level, considering demand both before and after the proposed personalized shifting recommendations. (c) Future scenarios capture the evolution of EV adopters’ demographic features, charging demand, and the public charging station supply for increasing adoption rates.
-\
+\\
 <p align="center">
   <img src="figures/fig1_overview.jpg" width="900">
   <br><i>Figure 1. Overview</i>
