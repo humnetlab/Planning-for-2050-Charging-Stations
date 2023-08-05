@@ -61,7 +61,6 @@ colors= ['#440000', '#580000', '#700401', '#892216', '#a23929', '#bc4f3c', '#d66
 nodes = np.arange(0,1.1,0.1)
 redcmap = clr.LinearSegmentedColormap.from_list("redcmap", list(zip(nodes, colors)))
 
-
 class AnaShift():
     def __init__(self, work_l2_access,home_l2_access,peak_start,peak_end,acceptance,max_stay):
         super().__init__()
@@ -277,9 +276,8 @@ class AnaShift():
         plt.show()
         
     def visShaveSector(self): 
-        
         df_shift_session = self.df_shift_session[self.df_shift_session['id'].isin(self.user_select)].copy()
-        df_shift_total = df_shift_session[df_shift_session['is_shift']>=1].copy()
+        df_shift_total = df_shift_session[df_shift_session['is_shift']!=0].copy()
 
         df_shift_home = df_shift_total[df_shift_total['original_session_type'].isin(['home_l1','home_l2','mud_l2'])]
         home_home = len(df_shift_home[df_shift_home['session_type'].isin(['home_l1','home_l2','mud_l2'])])
@@ -322,6 +320,7 @@ class AnaShift():
                     value = values
                 ))])
         fig.write_image(os.path.join(self.figure_folder_name,'fig3_sanky.pdf'))
+        fig.show()
 
     def visZipScatter(self):
         current_rate = 2
@@ -330,7 +329,7 @@ class AnaShift():
 
         demand_supply_results = demand_supply[demand_supply['adoption rate']==current_rate]
         g = sns.jointplot(x='week_peak_before', y='week_peak_after', data=demand_supply_results, 
-                        kind="reg", truncate=True,height=3.5,xlim=(0,1000),ylim=(0,1000),color=color_platte[1], scatter_kws={"s": 8})
+                        kind="reg", truncate=True,height=3.5,xlim=(0,1000),ylim=(0,1000),color=color_platte[7], scatter_kws={"s": 8})
         g.ax_joint.set_xlabel('          ',fontsize=fsize)
         g.ax_joint.set_ylabel('          ',fontsize=fsize)
         plt.plot([0, 3000], [0, 3000], ls="--", c=".3", label='        ')
@@ -339,7 +338,7 @@ class AnaShift():
         plt.show()
 
         g = sns.jointplot(x='week_offpeak_before', y='week_offpeak_after', data=demand_supply_results,
-                        kind="reg", truncate=True,height=3.5,xlim=(0,2000),ylim=(0,2000),color=color_platte[7], scatter_kws={"s": 8})
+                        kind="reg", truncate=True,height=3.5,xlim=(0,2000),ylim=(0,2000),color=color_platte[1], scatter_kws={"s": 8})
         plt.plot([0, 3000], [0, 3000], ls="--", c=".3", label='           ')
         plt.legend(frameon=False, fontsize = fsize, loc = [0.35,0.1])
         g.ax_joint.set_xlabel('          ',fontsize=fsize)
@@ -792,7 +791,6 @@ class AnaShift():
         cx.add_basemap(ax[1], source=cx.providers.CartoDB.PositronNoLabels, crs=geozip_merge.crs,attribution_size=6)
         plt.savefig(os.path.join(self.figure_folder_name,'sp_geo_linear_offpeak.pdf'),dpi=300,transparent=True, bbox_inches='tight')
         plt.show()
-
 
 if __name__ == "__main__":
     anashf = AnaShift(0.5,0.54,17,21,1,9)

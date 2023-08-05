@@ -90,7 +90,6 @@ class AnaBehavior():
         return group_zipcode_percentage
 
     def visGroup(self):
-        
         p_z = {}
         for nG in range(136):
             p_z[nG] = pd.read_csv(os.path.join('..','data','speech','SPEECh Original Model 136','pz_weekday_g_'+str(nG)+'.csv'),index_col=0).mean()
@@ -161,7 +160,7 @@ class AnaBehavior():
         df_other_l3 = df[df['session_type']=='public_l3']
         df_other_l3['charge_end_time'] = np.minimum(df_other_l3['arrive_time']+(df_other_l3['session_energy']/public_l3_rate)*6,df_other_l3['depature_time'])
 
-        zipcode_list = df['stay_zipcode'].unique()
+        zipcode_list = df['stay_zipcode'].dropna().unique()
         home_demand_l1 = {}; home_demand_l2 = {}; home_demand_l3 = {}; work_demand = {}; other_demand_l2 = {}; other_demand_l3 = {}; 
         total_demand = {}; home_demand = {}; other_demand = {}
 

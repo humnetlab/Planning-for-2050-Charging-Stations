@@ -178,7 +178,7 @@ class AnaAdopter():
                 horizontalalignment='right',
                 verticalalignment='top',
                 transform=ax.transAxes)
-        plt.savefig(os.path.join(self.figure_folder_name,'sp_cvrp_hist.pdf'), dpi = 300,format='pdf',  bbox_inches = 'tight')
+        plt.savefig(os.path.join(self.figure_folder_name,'sp_cvrp_hist.pdf'), dpi = 300, format='pdf',  bbox_inches = 'tight')
         plt.show()
     
     def visDemographics(self):

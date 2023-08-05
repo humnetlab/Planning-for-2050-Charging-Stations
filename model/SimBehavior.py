@@ -7,7 +7,6 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-
 def parallelize_dataframe(args, func, n_cores):
     pool = Pool(n_cores)
     results = pool.map(func,args)

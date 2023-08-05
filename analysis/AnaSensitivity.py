@@ -19,7 +19,7 @@ class AnaSensitivity():
         if not os.path.exists(self.figure_folder_name):
             os.makedirs(self.figure_folder_name)
     
-    def visSensitivity(self,fname,findex):
+    def visSensitivity(self,fname,findex,hatch):
         peakridges = pd.DataFrame([]); offpeakridges = pd.DataFrame([])
         for item in itertools.product(self.work_l2_access, self.home_l2_access,self.peak_start,self.acceptance,self.max_stay):
             work_l2_access,home_l2_access,peak_start,acceptance,max_stay = item
@@ -30,22 +30,24 @@ class AnaSensitivity():
             peakridge = demand_supply_results.copy()
             peakridge[fname] = item[findex]
             peakridge['day'] = 'Grid Peak Hours'
-            peakridge['peak value'] = (peakridge['week_peak_before']-peakridge['week_peak_after'])/peakridge['week_peak_before']
+            peakridge['peak value'] = ((peakridge['week_peak_before']-peakridge['week_peak_after'])/peakridge['week_peak_before']).values
             peakridges = pd.concat([peakridges,peakridge.copy()])
 
             offpeakridge = demand_supply_results.copy()
             offpeakridge[fname] = item[findex]
             offpeakridge['day'] = 'Grid Off-Peak Hours'
-            offpeakridge['peak value'] = (offpeakridge['week_offpeak_after']-offpeakridge['week_offpeak_before'])/offpeakridge['week_offpeak_before']
+            offpeakridge['peak value'] = ((offpeakridge['week_offpeak_after']-offpeakridge['week_offpeak_before'])/offpeakridge['week_offpeak_before']).values
             offpeakridges = pd.concat([offpeakridges,offpeakridge.copy()])
 
+        peakridges = peakridges[peakridges['peak value']!=-np.inf]
         g = sns.catplot(
             data=peakridges, kind='bar',
-            x='adoption rate', y='peak value', hue=fname, hatch='.',
+            x='adoption rate', y='peak value', hue=fname, hatch=hatch, legend=False,
             errorbar="sd", capsize=.05, height=4, palette = sns.color_palette(['#00429d', '#73a2c6', '#ffffe0', '#e0884e'])
         )
         g.fig.set_figwidth(10)
         g.fig.set_figheight(3)
+        plt.legend(fontsize=20,bbox_to_anchor=(1.1, 0.8))
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
         plt.savefig(os.path.join(self.figure_folder_name,'sp_sensi_'+fname+'.pdf'), dpi = 300, pad_inches = .1, bbox_inches = 'tight')
@@ -56,5 +58,5 @@ if __name__ == "__main__":
     peak_start_list = [17]
     acceptance_list = [1]; max_stay_list = [3,5,7,9]
     anasen = AnaSensitivity(work_l2_access_list,home_l2_access_list,peak_start_list,acceptance_list,max_stay_list)
-    anasen.visSensitivity('maxstay',4)
+    anasen.visSensitivity('maxstay',4,'/')
     

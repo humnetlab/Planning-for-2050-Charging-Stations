@@ -81,8 +81,8 @@ def calDemand(para):
         df_id = pd.DataFrame({'id':out_id, 'arrive_time':out_arrive_time, \
             'depature_time':out_departure_time, 'session_energy': out_session_energy,\
              'stay_zipcode':out_stay_zipcode, 'session_type':out_session_type, 'original_session_type':session_type, \
-             'original_arrive_time':arrive_time, 'original_depature_time':departure_time, \
-             'is_peak': out_is_peak, 'is_shift': out_is_shift})
+             'original_arrive_time':arrive_time, 'original_depature_time':departure_time, 'original_stay_zipcode': stay_zipcode,\
+             'is_shift': out_is_shift})
         list_of_df.append(df_id)
     df_concat = pd.concat(list_of_df)
     pickle.dump(df_concat, open(os.path.join(batch_name,'userTraj_shift_'+str(batch_id)+'.pkl'),'wb'), pickle.HIGHEST_PROTOCOL)
@@ -146,7 +146,7 @@ class SimShift():
 
     def calZIPCode(self):
         df_user_session = pd.read_csv(os.path.join(self.behavior_folder_name,'simulated_session.csv'))
-        self.zipcode_list = df_user_session['stay_zipcode'].unique()
+        self.zipcode_list = df_user_session['stay_zipcode'].dropna().unique()
 
     def calExistedStation(self):
         info = pd.read_csv(os.path.join('..','data','supply','usage_type.csv'))
@@ -213,14 +213,13 @@ class SimShift():
         df_shift_session_follow_no['depature_time'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['original_depature_time'].values
         df_shift_session_follow_no['session_energy'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['session_energy'].values
         df_shift_session_follow_no['session_type'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['original_session_type'].values
-        df_shift_session_follow_no['stay_zipcode'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['stay_zipcode'].values
+        df_shift_session_follow_no['stay_zipcode'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['original_stay_zipcode'].values
         df_shift_session_follow_no['is_shift'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['is_shift'].values
         df_shift_session_follow_no['original_session_type'] = df_shift_session_follow[df_shift_session_follow['is_follow']==0]['original_session_type'].values
         
         df_shift_session_acceptance = pd.concat([df_shift_session_follow_yes,df_shift_session_follow_no])
         df_shift_session_acceptance.to_csv(os.path.join(self.shift_folder_name,'shifted_session.csv'),index=False)
         del df_shift_session, df_shift_session_acceptance, df_shift_session_follow_yes,df_shift_session_follow_no
-
 
     def simEVLoad(self,df):
         home_l2_rate = 6.6;work_l2_rate = 6.6;mud_l2_rate = 6.6;public_l2_rate = 6.6;home_l1_rate = 1.2;public_l3_rate = 50;dayhour = 24*7
@@ -309,7 +308,7 @@ class SimShift():
         df_shift_session = pd.read_csv(os.path.join(self.shift_folder_name,'shifted_session.csv')) 
 
         demand_list = []
-        for (year,rate) in zip([0,2,3,4,5,6,0.3,0.5],[2,20,40,60,80,100,0.3,0.5]):
+        for (year,rate) in zip([0,2,3,4,5,6],[2,20,40,60,80,100]):
 
             user_select = pickle.load(open(os.path.join(self.adopter_folder_name,'selected_EV_Drivers_' + str(year) + 'p.pkl'), 'rb'), encoding='bytes')
             df_before = df_user_session[df_user_session['id'].isin(user_select)]
@@ -345,7 +344,7 @@ class SimShift():
         del demand,demand_list
 
         supply_list = []
-        for (year,rate) in zip([0,2,3,4,5,6,0.3,0.5],[2,20,40,60,80,100,0.3,0.5]):
+        for (year,rate) in zip([0,2,3,4,5,6],[2,20,40,60,80,100]):
             user_select = pickle.load(open(os.path.join(self.adopter_folder_name,'selected_EV_Drivers_' + str(year) + 'p.pkl'), 'rb'), encoding='bytes')
             
             df_before = df_user_session[df_user_session['id'].isin(user_select)]

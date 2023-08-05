@@ -242,7 +242,7 @@ class AnaStat():
         df_shift_session = self.df_shift_session.copy()
         user_select = pickle.load(open(os.path.join(self.adopter_folder_name,'selected_EV_Drivers_' + str(0) + 'p.pkl'), 'rb'), encoding='bytes')
         df_shift_session = df_shift_session[df_shift_session['id'].isin(user_select)]
-        df_shift_total = df_shift_session[df_shift_session['is_shift']>=1]
+        df_shift_total = df_shift_session[df_shift_session['is_shift']!=0]
 
         df_shift_home = df_shift_total[df_shift_total['original_session_type'].isin(['home_l1','home_l2','mud_l2'])]
         home_home = len(df_shift_home[df_shift_home['session_type'].isin(['home_l1','home_l2','mud_l2'])])
@@ -393,13 +393,14 @@ class AnaStat():
         demand_supply_results = demand_supply[demand_supply['adoption rate']==20]
         demand_supply_results['demand_before'] = demand_supply_results[['week_peak_before', 'week_offpeak_before']].max(axis=1)
         demand_supply_results['demand_after'] = demand_supply_results[['week_peak_after', 'week_offpeak_after']].max(axis=1)
-        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 20%',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/50)
-
+        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 20%, power 50 [kW]',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/50)
+        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 20%, power 6.6 [kW]',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/6.6)
         demand_supply = self.supply.copy()
         demand_supply_results = demand_supply[demand_supply['adoption rate']==100]
         demand_supply_results['demand_before'] = demand_supply_results[['week_peak_before', 'week_offpeak_before']].max(axis=1)
         demand_supply_results['demand_after'] = demand_supply_results[['week_peak_after', 'week_offpeak_after']].max(axis=1)
-        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 100%',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/50)
+        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 100%, power 50 [kW]',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/50)
+        print('ZIP Code level average increase in station insufficiency caused by recommendations, adoption rate 100%, power 6.6 [kW]',(demand_supply_results['demand_after']-demand_supply_results['demand_before']).mean()/6.6)
     
     def calFutureDemandYear(self,year): 
         print("=====================Future Demand=======================")
@@ -427,15 +428,18 @@ class AnaStat():
         print('Bay Area peak charging load during on-peak hours',np.max(np.sum(week_peak_total,axis=0)))
         print('Bay Area peak charging load reduction ratio during on-peak hours',(np.max(np.sum(week_peak_total,axis=0))-np.max(np.sum(week_peak_totals,axis=0)))/np.max(np.sum(week_peak_total,axis=0)) )
 
-    def calFutureSupplyYear(self,year,power): 
+    def calFutureSupplyYear(self,year): 
         print("=====================Future Supply=======================")
-        print('Year',year, 'Power', power)
         demand_supply = self.supply.copy()
         demand_supply_results = demand_supply[demand_supply['adoption rate']==year]
         demand_supply_results['demand_before'] = demand_supply_results[['week_peak_before', 'week_offpeak_before']].max(axis=1)
         demand_supply_results['demand_after'] = demand_supply_results[['week_peak_after', 'week_offpeak_after']].max(axis=1)
-        print('# Bay Area missing charging stations before recomendations',(demand_supply_results['demand_before']-demand_supply_results['Power']).sum()/power)
-        print('# Bay Area missing charging stations after recomendations',(demand_supply_results['demand_after']-demand_supply_results['Power']).sum()/power)
+        power = 50
+        print('# Bay Area missing charging stations before recomendations, power 50 [kW]',(demand_supply_results['demand_before']-demand_supply_results['Power']).sum()/power)
+        print('# Bay Area missing charging stations after recomendations, power 50 [kW]',(demand_supply_results['demand_after']-demand_supply_results['Power']).sum()/power)
+        power = 6.6
+        print('# Bay Area missing charging stations before recomendations, power 6.6 [kW]',(demand_supply_results['demand_before']-demand_supply_results['Power']).sum()/power)
+        print('# Bay Area missing charging stations after recomendations, power 6.6 [kW]',(demand_supply_results['demand_after']-demand_supply_results['Power']).sum()/power)
 
 if __name__ == "__main__":
     anastat = AnaStat(0.5,0.54,17,21,1,9)
@@ -452,7 +456,7 @@ if __name__ == "__main__":
     anastat.calFutureNetChange()
     anastat.calFutureDemandYear(0.3)
     anastat.calFutureDemandYear(0.5)
-    anastat.calFutureSupplyYear(0.5,50)
+    anastat.calFutureSupplyYear(0.5)
     
     
     
