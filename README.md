@@ -1,5 +1,7 @@
 # Planning for 2050: Charging stations to support flexible electric vehicle demand considering individual mobility patterns
 
+[![DOI](https://zenodo.org/badge/624661479.svg)](https://zenodo.org/badge/latestdoi/624661479)
+
 #### Jiaman Wu, Siobhan Powell, Yanyan Xu, Ram Rajagopal, Marta C. Gonzalez
 
 ## What's this?
